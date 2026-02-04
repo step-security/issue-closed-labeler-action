@@ -1,0 +1,15 @@
+name: Issue Closed Labeler
+author: step-security
+description: Conditionally add or remove labels of issues when closed via a PR.
+
+inputs:
+  token:
+    description: "GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)"
+    default: ${{ github.token }}
+  rules:
+    description: "The rules to follow to set and unset labels"
+    required: true
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
