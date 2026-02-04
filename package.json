@@ -1,6 +1,6 @@
 {
   "name": "issue-closed-labeler-action",
-  "version": "0.0.0-development",
+  "version": "1.0.2",
   "private": true,
   "description": "Conditionally add labels to issues when closed.",
   "keywords": [

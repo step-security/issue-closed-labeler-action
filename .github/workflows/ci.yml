@@ -1,27 +1,12 @@
 name: CI
 
 on:
-  - push
   - pull_request
 
 jobs:
-  pre_job:
-    runs-on: ubuntu-latest
-    outputs:
-      should_skip: ${{ steps.skip_check.outputs.should_skip }}
-    steps:
-      - name: Skip Duplicate Actions
-        id: skip_check
-        uses: fkirc/skip-duplicate-actions@v5
-        with:
-          concurrent_skipping: "same_content"
-          paths_ignore: '[".vscode/", "**/docs/**", "**/*.md"]'
-          do_not_skip: '["pull_request"]'
 
   lint:
     name: Linting Checks
-    needs: pre_job
-    if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -46,8 +31,6 @@ jobs:
 
   tests:
     name: "Test"
-    needs: pre_job
-    if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
