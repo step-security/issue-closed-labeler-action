@@ -1,0 +1,1 @@
+# issue-closed-labeler-action
