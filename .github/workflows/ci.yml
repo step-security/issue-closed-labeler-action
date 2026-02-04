@@ -32,6 +32,9 @@ jobs:
         with:
           node-version: "lts/*"
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Install Dependencies
         run: yarn install --immutable
 
@@ -56,6 +59,9 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
+
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Install Dependencies
         run: yarn install --immutable
