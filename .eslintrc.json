@@ -1,0 +1,64 @@
+{
+  "root": true,
+  "env": {
+    "node": true
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "extends": [
+    "@rebeccastevens/eslint-config/modern",
+    "@rebeccastevens/eslint-config/typescript",
+    "@rebeccastevens/eslint-config/common-overrides",
+    "plugin:prettier/recommended",
+    "prettier"
+  ],
+  "parserOptions": {
+    "project": [
+      "./tsconfig.json",
+      "./benchmark/tsconfig.json",
+      "./tests/tsconfig.json"
+    ]
+  },
+  "ignorePatterns": [
+    "/coverage/",
+    "/dist/",
+    "*.cjs",
+    "*.mjs",
+    "*.js"
+  ],
+  "rules": {
+    "@typescript-eslint/naming-convention": "off",
+    "functional/prefer-readonly-type": "off",
+    "functional/no-conditional-statement": "off",
+    "functional/no-loop-statement": "off",
+    "functional/no-throw-statement": "off",
+    "functional/no-return-void": "off",
+    "import/no-relative-parent-imports": "error",
+    "jsdoc/require-jsdoc": "off",
+    "node/no-unpublished-import": "off",
+    "unicorn/prefer-at": [
+      "error",
+      {
+        "checkAllIndexAccess": false
+      }
+    ],
+    "unicorn/prefer-object-has-own": "error"
+  },
+  "overrides": [
+    {
+      "files": "src/**",
+      "rules": {
+        "node/no-unpublished-import": "off"
+      }
+    },
+    {
+      "files": "typings/**",
+      "rules": {
+        "@typescript-eslint/consistent-type-definitions": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "functional/no-method-signature": "off"
+      }
+    }
+  ]
+}
