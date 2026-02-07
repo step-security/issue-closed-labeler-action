@@ -1,0 +1,7 @@
+[[IgnoredVulns]]
+id = "GHSA-v6h2-p8h4-qcjw"
+reason = "ReDoS in brace-expansion only used in dev tools (minimatch), not in production runtime"
+
+[[IgnoredVulns]]
+id = "GHSA-g9mf-h72j-4rw9"
+reason = "Undici decompression issue in @actions/github only affects malicious servers, GitHub API is trusted"

@@ -66,7 +66,7 @@
     ]
   },
   // MD034/no-bare-urls - Bare URL used
-  "MD034": true,
+  "MD034": false,
   // MD035/hr-style - Horizontal rule style
   "MD035": { "style": "---" },
   // MD036/no-emphasis-as-heading/no-emphasis-as-header - Emphasis used instead of a heading

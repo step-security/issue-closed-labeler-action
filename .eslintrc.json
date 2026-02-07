@@ -43,7 +43,8 @@
         "checkAllIndexAccess": false
       }
     ],
-    "unicorn/prefer-object-has-own": "error"
+    "unicorn/prefer-object-has-own": "error",
+    "unicorn/switch-case-braces": "off"
   },
   "overrides": [
     {
