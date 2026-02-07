@@ -52,7 +52,7 @@
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.30.0",
     "@vercel/ncc": "^0.34.0",
-    "ava": "^4.3.3",
+    "ava": "^6.4.1",
     "c8": "^7.11.3",
     "codecov": "^3.8.3",
     "cspell": "^6.8.1",
