@@ -611,22 +611,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@isaacs/balanced-match@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "@isaacs/balanced-match@npm:4.0.1"
-  checksum: 102fbc6d2c0d5edf8f6dbf2b3feb21695a21bc850f11bc47c4f06aa83bd8884fde3fe9d6d797d619901d96865fdcb4569ac2a54c937992c48885c5e3d9967fe8
-  languageName: node
-  linkType: hard
-
-"@isaacs/brace-expansion@npm:^5.0.1":
-  version: 5.0.1
-  resolution: "@isaacs/brace-expansion@npm:5.0.1"
-  dependencies:
-    "@isaacs/balanced-match": ^4.0.1
-  checksum: 21f8192f022c320f7acf899730feb419b1a5f4ccc741481ef8f4b3111e97a41c06e5783871bb240da2e87de909c7fc5b0d07f73818db521fee06541c086ea351
-  languageName: node
-  linkType: hard
-
 "@isaacs/fs-minipass@npm:^4.0.0":
   version: 4.0.1
   resolution: "@isaacs/fs-minipass@npm:4.0.1"
@@ -1942,25 +1926,25 @@ __metadata:
   linkType: hard
 
 "brace-expansion@npm:^1.1.7":
-  version: 1.1.11
-  resolution: "brace-expansion@npm:1.1.11"
+  version: 1.1.13
+  resolution: "brace-expansion@npm:1.1.13"
   dependencies:
     balanced-match: ^1.0.0
     concat-map: 0.0.1
-  checksum: faf34a7bb0c3fcf4b59c7808bc5d2a96a40988addf2e7e09dfbb67a2251800e0d14cd2bfc1aa79174f2f5095c54ff27f46fb1289fe2d77dac755b5eb3434cc07
+  checksum: b5f4329fdbe9d2e25fa250c8f866ebd054ba946179426e99b86dcccddabdb1d481f0e40ee5430032e62a7d0a6c2837605ace6783d015aa1d65d85ca72154d936
   languageName: node
   linkType: hard
 
-"brace-expansion@npm:^2.0.1":
-  version: 2.0.2
-  resolution: "brace-expansion@npm:2.0.2"
+"brace-expansion@npm:^2.0.1, brace-expansion@npm:^2.0.2":
+  version: 2.0.3
+  resolution: "brace-expansion@npm:2.0.3"
   dependencies:
     balanced-match: ^1.0.0
-  checksum: 01dff195e3646bc4b0d27b63d9bab84d2ebc06121ff5013ad6e5356daa5a9d6b60fa26cf73c74797f2dc3fbec112af13578d51f75228c1112b26c790a87b0488
+  checksum: e9dd66caaf0784126e1654f1bc19adb28f3ef86f39f2226f833f7700ec727c141f6cd85eaa47bacf3426beda01c9fbc3a2f28174cf59330dc9b58ffaf9e09d96
   languageName: node
   linkType: hard
 
-"brace-expansion@npm:^5.0.2":
+"brace-expansion@npm:^5.0.5":
   version: 5.0.5
   resolution: "brace-expansion@npm:5.0.5"
   dependencies:
@@ -2358,7 +2342,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:~14.0.2":
+"commander@npm:~14.0.3":
   version: 14.0.3
   resolution: "commander@npm:14.0.3"
   checksum: b8440159124aefbb02784a8996cd0481d8ce503d8d3cd413f4289d06db7e912c36b511277c2faba62f59152dd9ff79239d75e3b9400d9402851878994201d429
@@ -4857,7 +4841,7 @@ __metadata:
     eslint-plugin-promise: ^6.6.0
     eslint-plugin-sonarjs: ^0.15.0
     eslint-plugin-unicorn: 53.0.0
-    markdownlint-cli: ^0.47.0
+    markdownlint-cli: ^0.48.0
     prettier: 2.7.1
     rimraf: ^3.0.2
     rollup: ^2.77.2
@@ -5219,7 +5203,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdown-it@npm:~14.1.0":
+"markdown-it@npm:~14.1.1":
   version: 14.1.1
   resolution: "markdown-it@npm:14.1.1"
   dependencies:
@@ -5235,25 +5219,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdownlint-cli@npm:^0.47.0":
-  version: 0.47.0
-  resolution: "markdownlint-cli@npm:0.47.0"
+"markdownlint-cli@npm:^0.48.0":
+  version: 0.48.0
+  resolution: "markdownlint-cli@npm:0.48.0"
   dependencies:
-    commander: ~14.0.2
+    commander: ~14.0.3
     deep-extend: ~0.6.0
     ignore: ~7.0.5
     js-yaml: ~4.1.1
     jsonc-parser: ~3.3.1
     jsonpointer: ~5.0.1
-    markdown-it: ~14.1.0
+    markdown-it: ~14.1.1
     markdownlint: ~0.40.0
-    minimatch: ~10.1.1
+    minimatch: ~10.2.4
     run-con: ~1.3.2
-    smol-toml: ~1.5.2
+    smol-toml: ~1.6.0
     tinyglobby: ~0.2.15
   bin:
     markdownlint: markdownlint.js
-  checksum: 26cb8086db3dfa55ecac2be1eea5d2caab9d8d0340ea61f347cb524707a721a726006c5a27ece55daa1dc36f1886de6483a20c643d56a9583bb7ffc73624d5a0
+  checksum: 4fc7e77967906e17bd0a3c30ae85a40f447a71fff5511a8eedddbf8dc2b9ee1fa34c536f75d37ad8d82b9d0764380c54d3a178aacc17d1362bc58c1f2280bf67
   languageName: node
   linkType: hard
 
@@ -5695,39 +5679,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^10.1.2, minimatch@npm:~10.1.1":
-  version: 10.1.2
-  resolution: "minimatch@npm:10.1.2"
+"minimatch@npm:^10.1.2, minimatch@npm:~10.2.4":
+  version: 10.2.5
+  resolution: "minimatch@npm:10.2.5"
   dependencies:
-    "@isaacs/brace-expansion": ^5.0.1
-  checksum: a6ad8bb522741fdf6aca0545054057a2a540d7c76c4f6ab0f34694e5de9616c5487dbab26b6ae564437636863d4d5cb3609fa0d8408b6e56312d7a3eb5e22e05
+    brace-expansion: ^5.0.5
+  checksum: 000423875fecbc7da1d74bf63c9081363a71291ef2588c376c45647ac004582cb5bc8cc09ef84420b26bfb490f4d0818d328e78569c6228e20d90271283f73ba
   languageName: node
   linkType: hard
 
 "minimatch@npm:^3.0.4, minimatch@npm:^3.0.5, minimatch@npm:^3.1.1, minimatch@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "minimatch@npm:3.1.2"
+  version: 3.1.5
+  resolution: "minimatch@npm:3.1.5"
   dependencies:
     brace-expansion: ^1.1.7
-  checksum: c154e566406683e7bcb746e000b84d74465b3a832c45d59912b9b55cd50dee66e5c4b1e5566dba26154040e51672f9aa450a9aef0c97cfc7336b78b7afb9540a
+  checksum: 47ef6f412c08be045a7291d11b1c40777925accf7252dc6d3caa39b1bfbb3a7ea390ba7aba464d762d783265c644143d2c8a204e6b5763145024d52ee65a1941
   languageName: node
   linkType: hard
 
 "minimatch@npm:^5.0.1":
-  version: 5.1.0
-  resolution: "minimatch@npm:5.1.0"
+  version: 5.1.9
+  resolution: "minimatch@npm:5.1.9"
   dependencies:
     brace-expansion: ^2.0.1
-  checksum: 15ce53d31a06361e8b7a629501b5c75491bc2b59712d53e802b1987121d91b433d73fcc5be92974fde66b2b51d8fb28d75a9ae900d249feb792bb1ba2a4f0a90
+  checksum: 418438bd7701ba811f1108f28fcd3a638a6065c7b1245b85e25bcdb674410b4bebd8763c90c91bc8d22d93260c02cc129b354267a463c3399be5732d6e11e120
   languageName: node
   linkType: hard
 
 "minimatch@npm:^9.0.4":
-  version: 9.0.7
-  resolution: "minimatch@npm:9.0.7"
+  version: 9.0.9
+  resolution: "minimatch@npm:9.0.9"
   dependencies:
-    brace-expansion: ^5.0.2
-  checksum: 03c871cdf51b643c3e12eac582f44ae7a10b2829e018f5d71376089db118fbfe16e992e16300fd0150ff3e353d58b5fe1507c9815b29fd871a97e749e7fe063d
+    brace-expansion: ^2.0.2
+  checksum: 5292681ba1e14544ca9214ba5e412bb346214fb783354b22752f2d1e5c176e4a2c0bfcafeb1046389b816009ab73ba5410b176ce605632e8aa695db25f87f6b9
   languageName: node
   linkType: hard
 
@@ -6245,9 +6229,9 @@ __metadata:
   linkType: hard
 
 "picomatch@npm:^2.0.4, picomatch@npm:^2.2.1, picomatch@npm:^2.2.2, picomatch@npm:^2.3.1":
-  version: 2.3.1
-  resolution: "picomatch@npm:2.3.1"
-  checksum: 050c865ce81119c4822c45d3c84f1ced46f93a0126febae20737bd05ca20589c564d6e9226977df859ed5e03dc73f02584a2b0faad36e896936238238b0446cf
+  version: 2.3.2
+  resolution: "picomatch@npm:2.3.2"
+  checksum: 0a3f5b9ff28faf022e1429b66e47c122e19e7b31cbd098095d29e949684e7ff1d9b83a2133d931326a53ec6ec11c7c59b1850c27fde2f26ca1d5f35861e9701a
   languageName: node
   linkType: hard
 
@@ -6846,10 +6830,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"smol-toml@npm:~1.5.2":
-  version: 1.5.2
-  resolution: "smol-toml@npm:1.5.2"
-  checksum: 75b7e8482151cbe48be094de205631502d5694c2a7d968446799e8b988b4105bd6efd3b6a986baa40d9e9b47cbb2daada21a302901a618793aabd35a670f195e
+"smol-toml@npm:~1.6.0":
+  version: 1.6.1
+  resolution: "smol-toml@npm:1.6.1"
+  checksum: bb5fce0c0369426ae8ae71ba91b5754423037dce8a2907d659ba4e45f5d7af1baabf7efea8ddb46ce681737be77a3795163f06ce4d7d3953f10cf6533194ffdb
   languageName: node
   linkType: hard
 

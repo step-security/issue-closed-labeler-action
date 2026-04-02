@@ -67,7 +67,7 @@
     "eslint-plugin-prettier": "^4.2.5",
     "eslint-plugin-promise": "^6.6.0",
     "eslint-plugin-sonarjs": "^0.15.0",
-    "markdownlint-cli": "^0.47.0",
+    "markdownlint-cli": "^0.48.0",
     "prettier": "2.7.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.77.2",
