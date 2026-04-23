@@ -26,6 +26,10 @@ on:
         required: false
         type: string
         default: "3.2.3"
+      node_version:
+        description: "Specify Node.js version (e.g., '18', '20', 'lts/*')"
+        required: false
+        default: "24"
   schedule:
     - cron: "0 0 * * 1"
 
@@ -38,6 +42,7 @@ jobs:
       script: ${{ inputs.script || 'yarn build' }}
       package_manager: ${{ inputs.package_manager || 'yarn' }}
       yarn_version: ${{ inputs.yarn_version || '3.2.3' }}
+      node_version: "${{ inputs.node_version || '24' }}"
 
 permissions:
   contents: write
