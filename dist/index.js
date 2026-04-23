@@ -1,4 +1,6 @@
 import assert$q from 'node:assert';
+import * as require$$1 from 'fs';
+import require$$1__default from 'fs';
 import require$$1$1 from 'tls';
 import require$$2$1 from 'http';
 import require$$1$2 from 'https';
@@ -23,7 +25,6 @@ import require$$1$6 from 'node:url';
 import require$$5$2 from 'node:async_hooks';
 import require$$1$7 from 'node:console';
 import require$$0$1 from 'os';
-import require$$1 from 'fs';
 import require$$1$9 from 'path';
 import require$$0$9 from 'assert';
 import require$$2$3 from 'child_process';
@@ -296,7 +297,7 @@ fileCommand.prepareKeyValueMessage = prepareKeyValueMessage;
 // We use any as a valid input type
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const crypto$1 = __importStar$4(require$$0$2);
-const fs$1 = __importStar$4(require$$1);
+const fs$1 = __importStar$4(require$$1__default);
 const os = __importStar$4(require$$0$1);
 const utils_1$1 = utils$6;
 function issueFileCommand(command, message) {
@@ -28558,7 +28559,7 @@ function requireSummary () {
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.summary = exports.markdownSummary = exports.SUMMARY_DOCS_URL = exports.SUMMARY_ENV_VAR = void 0;
 		const os_1 = require$$0$1;
-		const fs_1 = require$$1;
+		const fs_1 = require$$1__default;
 		const { access, appendFile, writeFile } = fs_1.promises;
 		exports.SUMMARY_ENV_VAR = 'GITHUB_STEP_SUMMARY';
 		exports.SUMMARY_DOCS_URL = 'https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary';
@@ -28979,7 +28980,7 @@ function requireIoUtil () {
 		exports.isRooted = isRooted;
 		exports.tryGetExecutablePath = tryGetExecutablePath;
 		exports.getCmdPath = getCmdPath;
-		const fs = __importStar(require$$1);
+		const fs = __importStar(require$$1__default);
 		const path = __importStar(require$$1$9);
 		_a = fs.promises
 		// export const {open} = 'fs'
@@ -30738,7 +30739,7 @@ var context$1 = {};
 
 Object.defineProperty(context$1, "__esModule", { value: true });
 context$1.Context = void 0;
-const fs_1 = require$$1;
+const fs_1 = require$$1__default;
 const os_1 = require$$0$1;
 class Context$1 {
     /**
@@ -58713,7 +58714,7 @@ const typeOfTest = (type) => (thing) => typeof thing === type;
  *
  * @returns {boolean} True if value is an Array, otherwise false
  */
-const { isArray } = Array;
+const { isArray: isArray$1 } = Array;
 
 /**
  * Determine if a value is undefined
@@ -59012,7 +59013,7 @@ function forEach(obj, fn, { allOwnKeys = false } = {}) {
     obj = [obj];
   }
 
-  if (isArray(obj)) {
+  if (isArray$1(obj)) {
     // Iterate over array values
     for (i = 0, l = obj.length; i < l; i++) {
       fn.call(null, obj[i], i, obj);
@@ -59101,7 +59102,7 @@ function merge(/* obj1, obj2, obj3, ... */) {
       result[targetKey] = merge(result[targetKey], val);
     } else if (isPlainObject(val)) {
       result[targetKey] = merge({}, val);
-    } else if (isArray(val)) {
+    } else if (isArray$1(val)) {
       result[targetKey] = val.slice();
     } else if (!skipUndefined || !isUndefined(val)) {
       result[targetKey] = val;
@@ -59250,7 +59251,7 @@ const endsWith = (str, searchString, position) => {
  */
 const toArray = (thing) => {
   if (!thing) return null;
-  if (isArray(thing)) return thing;
+  if (isArray$1(thing)) return thing;
   let i = thing.length;
   if (!isNumber(i)) return null;
   const arr = new Array(i);
@@ -59403,7 +59404,7 @@ const toObjectSet = (arrayOrString, delimiter) => {
     });
   };
 
-  isArray(arrayOrString) ? define(arrayOrString) : define(String(arrayOrString).split(delimiter));
+  isArray$1(arrayOrString) ? define(arrayOrString) : define(String(arrayOrString).split(delimiter));
 
   return obj;
 };
@@ -59452,7 +59453,7 @@ const toJSONObject = (obj) => {
 
       if (!('toJSON' in source)) {
         stack[i] = source;
-        const target = isArray(source) ? [] : {};
+        const target = isArray$1(source) ? [] : {};
 
         forEach(source, (value, key) => {
           const reducedValue = visit(value, i + 1);
@@ -59543,7 +59544,7 @@ const asap =
 const isIterable = (thing) => thing != null && isFunction$2(thing[iterator]);
 
 var utils$1 = {
-  isArray,
+  isArray: isArray$1,
   isArrayBuffer,
   isBuffer: isBuffer$1,
   isFormData,
@@ -72217,7 +72218,7 @@ var path = require$$1$9;
 var http$1 = require$$2$1;
 var https$1 = require$$1$2;
 var parseUrl$2 = require$$1$b.parse;
-var fs = require$$1;
+var fs = require$$1__default;
 var Stream = stream$4.Stream;
 var crypto = require$$0$2;
 var mime = mimeTypes;
@@ -75423,6 +75424,13 @@ catch (error) {
   useNativeURL = error.code === "ERR_INVALID_URL";
 }
 
+// HTTP headers to drop across HTTP/HTTPS and domain boundaries
+var sensitiveHeaders = [
+  "Authorization",
+  "Proxy-Authorization",
+  "Cookie",
+];
+
 // URL fields to preserve in copy operations
 var preservedUrlFields = [
   "auth",
@@ -75503,6 +75511,11 @@ function RedirectableRequest(options, responseCallback) {
         cause : new RedirectionError({ cause: cause }));
     }
   };
+
+  // Create filter for sensitive HTTP headers
+  this._headerFilter = new RegExp("^(?:" +
+      sensitiveHeaders.concat(options.sensitiveHeaders).map(escapeRegex).join("|") +
+    ")$", "i");
 
   // Perform the first request
   this._performRequest();
@@ -75687,6 +75700,9 @@ RedirectableRequest.prototype._sanitizeOptions = function (options) {
   if (!options.headers) {
     options.headers = {};
   }
+  if (!isArray(options.sensitiveHeaders)) {
+    options.sensitiveHeaders = [];
+  }
 
   // Since http.request treats host as an alias of hostname,
   // but the url module interprets host as hostname plus port,
@@ -75869,7 +75885,7 @@ RedirectableRequest.prototype._processResponse = function (response) {
      redirectUrl.protocol !== "https:" ||
      redirectUrl.host !== currentHost &&
      !isSubdomain(redirectUrl.host, currentHost)) {
-    removeMatchingHeaders(/^(?:(?:proxy-)?authorization|cookie)$/i, this._options.headers);
+    removeMatchingHeaders(this._headerFilter, this._options.headers);
   }
 
   // Evaluate the beforeRedirect callback
@@ -76062,6 +76078,10 @@ function isSubdomain(subdomain, domain) {
   return dot > 0 && subdomain[dot] === "." && subdomain.endsWith(domain);
 }
 
+function isArray(value) {
+  return value instanceof Array;
+}
+
 function isString(value) {
   return typeof value === "string" || value instanceof String;
 }
@@ -76076,6 +76096,10 @@ function isBuffer(value) {
 
 function isURL(value) {
   return URL$1 && value instanceof URL$1;
+}
+
+function escapeRegex(regex) {
+  return regex.replace(/[\]\\/()*+?.$]/g, "\\$&");
 }
 
 // Exports
@@ -79998,18 +80022,38 @@ function isRawConditionComplexFull(condition) {
 }
 
 async function validateSubscription() {
-    const API_URL = `https://agent.api.stepsecurity.io/v1/github/${process.env.GITHUB_REPOSITORY}/actions/subscription`;
+    const eventPath = process.env.GITHUB_EVENT_PATH;
+    let repoPrivate;
+    if (eventPath && require$$1.existsSync(eventPath)) {
+        const eventData = JSON.parse(require$$1.readFileSync(eventPath, 'utf8'));
+        repoPrivate = eventData?.repository?.private;
+    }
+    const upstream = 'RebeccaStevens/issue-closed-labeler-action';
+    const action = process.env.GITHUB_ACTION_REPOSITORY;
+    const docsUrl = 'https://docs.stepsecurity.io/actions/stepsecurity-maintained-actions';
+    coreExports.info('');
+    coreExports.info('[1;36mStepSecurity Maintained Action[0m');
+    coreExports.info(`Secure drop-in replacement for ${upstream}`);
+    if (repoPrivate === false)
+        coreExports.info('[32m✓ Free for public repositories[0m');
+    coreExports.info(`[36mLearn more:[0m ${docsUrl}`);
+    coreExports.info('');
+    if (repoPrivate === false)
+        return;
+    const serverUrl = process.env.GITHUB_SERVER_URL || 'https://github.com';
+    const body = { action: action || '' };
+    if (serverUrl !== 'https://github.com')
+        body.ghes_server = serverUrl;
     try {
-        await axios$1.get(API_URL, { timeout: 3000 });
+        await axios$1.post(`https://agent.api.stepsecurity.io/v1/github/${process.env.GITHUB_REPOSITORY}/actions/maintained-actions-subscription`, body, { timeout: 3000 });
     }
     catch (error) {
         if (isAxiosError(error) && error.response?.status === 403) {
-            coreExports.error("Subscription is not valid. Reach out to support@stepsecurity.io");
+            coreExports.error(`[1;31mThis action requires a StepSecurity subscription for private repositories.[0m`);
+            coreExports.error(`[31mLearn how to enable a subscription: ${docsUrl}[0m`);
             process.exit(1);
         }
-        else {
-            coreExports.info("Timeout or API not reachable. Continuing to next step.");
-        }
+        coreExports.info('Timeout or API not reachable. Continuing to next step.');
     }
 }
 const ghToken = coreExports.getInput("token");
