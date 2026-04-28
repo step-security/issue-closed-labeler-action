@@ -58713,7 +58713,7 @@ const typeOfTest = (type) => (thing) => typeof thing === type;
  *
  * @returns {boolean} True if value is an Array, otherwise false
  */
-const { isArray } = Array;
+const { isArray: isArray$1 } = Array;
 
 /**
  * Determine if a value is undefined
@@ -59012,7 +59012,7 @@ function forEach(obj, fn, { allOwnKeys = false } = {}) {
     obj = [obj];
   }
 
-  if (isArray(obj)) {
+  if (isArray$1(obj)) {
     // Iterate over array values
     for (i = 0, l = obj.length; i < l; i++) {
       fn.call(null, obj[i], i, obj);
@@ -59101,7 +59101,7 @@ function merge(/* obj1, obj2, obj3, ... */) {
       result[targetKey] = merge(result[targetKey], val);
     } else if (isPlainObject(val)) {
       result[targetKey] = merge({}, val);
-    } else if (isArray(val)) {
+    } else if (isArray$1(val)) {
       result[targetKey] = val.slice();
     } else if (!skipUndefined || !isUndefined(val)) {
       result[targetKey] = val;
@@ -59250,7 +59250,7 @@ const endsWith = (str, searchString, position) => {
  */
 const toArray = (thing) => {
   if (!thing) return null;
-  if (isArray(thing)) return thing;
+  if (isArray$1(thing)) return thing;
   let i = thing.length;
   if (!isNumber(i)) return null;
   const arr = new Array(i);
@@ -59403,7 +59403,7 @@ const toObjectSet = (arrayOrString, delimiter) => {
     });
   };
 
-  isArray(arrayOrString) ? define(arrayOrString) : define(String(arrayOrString).split(delimiter));
+  isArray$1(arrayOrString) ? define(arrayOrString) : define(String(arrayOrString).split(delimiter));
 
   return obj;
 };
@@ -59452,7 +59452,7 @@ const toJSONObject = (obj) => {
 
       if (!('toJSON' in source)) {
         stack[i] = source;
-        const target = isArray(source) ? [] : {};
+        const target = isArray$1(source) ? [] : {};
 
         forEach(source, (value, key) => {
           const reducedValue = visit(value, i + 1);
@@ -59543,7 +59543,7 @@ const asap =
 const isIterable = (thing) => thing != null && isFunction$2(thing[iterator]);
 
 var utils$1 = {
-  isArray,
+  isArray: isArray$1,
   isArrayBuffer,
   isBuffer: isBuffer$1,
   isFormData,
@@ -75423,6 +75423,13 @@ catch (error) {
   useNativeURL = error.code === "ERR_INVALID_URL";
 }
 
+// HTTP headers to drop across HTTP/HTTPS and domain boundaries
+var sensitiveHeaders = [
+  "Authorization",
+  "Proxy-Authorization",
+  "Cookie",
+];
+
 // URL fields to preserve in copy operations
 var preservedUrlFields = [
   "auth",
@@ -75503,6 +75510,11 @@ function RedirectableRequest(options, responseCallback) {
         cause : new RedirectionError({ cause: cause }));
     }
   };
+
+  // Create filter for sensitive HTTP headers
+  this._headerFilter = new RegExp("^(?:" +
+      sensitiveHeaders.concat(options.sensitiveHeaders).map(escapeRegex).join("|") +
+    ")$", "i");
 
   // Perform the first request
   this._performRequest();
@@ -75687,6 +75699,9 @@ RedirectableRequest.prototype._sanitizeOptions = function (options) {
   if (!options.headers) {
     options.headers = {};
   }
+  if (!isArray(options.sensitiveHeaders)) {
+    options.sensitiveHeaders = [];
+  }
 
   // Since http.request treats host as an alias of hostname,
   // but the url module interprets host as hostname plus port,
@@ -75869,7 +75884,7 @@ RedirectableRequest.prototype._processResponse = function (response) {
      redirectUrl.protocol !== "https:" ||
      redirectUrl.host !== currentHost &&
      !isSubdomain(redirectUrl.host, currentHost)) {
-    removeMatchingHeaders(/^(?:(?:proxy-)?authorization|cookie)$/i, this._options.headers);
+    removeMatchingHeaders(this._headerFilter, this._options.headers);
   }
 
   // Evaluate the beforeRedirect callback
@@ -76062,6 +76077,10 @@ function isSubdomain(subdomain, domain) {
   return dot > 0 && subdomain[dot] === "." && subdomain.endsWith(domain);
 }
 
+function isArray(value) {
+  return value instanceof Array;
+}
+
 function isString(value) {
   return typeof value === "string" || value instanceof String;
 }
@@ -76076,6 +76095,10 @@ function isBuffer(value) {
 
 function isURL(value) {
   return URL$1 && value instanceof URL$1;
+}
+
+function escapeRegex(regex) {
+  return regex.replace(/[\]\\/()*+?.$]/g, "\\$&");
 }
 
 // Exports
