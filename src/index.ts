@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import * as fs from "fs";
+import * as fs from "node:fs";
 
 import * as core from "@actions/core";
 import * as github from "@actions/github";
@@ -12,12 +12,14 @@ import { getRepoName } from "./utils";
 
 async function validateSubscription(): Promise<void> {
   const eventPath = process.env.GITHUB_EVENT_PATH;
-  let repoPrivate: boolean | undefined;
-
-  if (eventPath && fs.existsSync(eventPath)) {
-    const eventData = JSON.parse(fs.readFileSync(eventPath, "utf8"));
-    repoPrivate = eventData?.repository?.private;
-  }
+  const repoPrivate: boolean | undefined =
+    eventPath !== undefined && fs.existsSync(eventPath)
+      ? (
+          JSON.parse(fs.readFileSync(eventPath, "utf8")) as {
+            repository?: { private?: boolean };
+          } | null
+        )?.repository?.private
+      : undefined;
 
   const upstream = "RebeccaStevens/issue-closed-labeler-action";
   const action = process.env.GITHUB_ACTION_REPOSITORY;
@@ -33,8 +35,8 @@ async function validateSubscription(): Promise<void> {
 
   if (repoPrivate === false) return;
 
-  const serverUrl = process.env.GITHUB_SERVER_URL || "https://github.com";
-  const body: Record<string, string> = { action: action || "" };
+  const serverUrl = process.env.GITHUB_SERVER_URL ?? "https://github.com";
+  const body: Record<string, string> = { action: action ?? "" };
   if (serverUrl !== "https://github.com") body.ghes_server = serverUrl;
   try {
     await axios.post(

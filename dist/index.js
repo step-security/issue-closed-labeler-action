@@ -1,6 +1,5 @@
 import assert$q from 'node:assert';
-import * as require$$1 from 'fs';
-import require$$1__default from 'fs';
+import * as fs$2 from 'node:fs';
 import require$$1$1 from 'tls';
 import require$$2$1 from 'http';
 import require$$1$2 from 'https';
@@ -25,6 +24,7 @@ import require$$1$6 from 'node:url';
 import require$$5$2 from 'node:async_hooks';
 import require$$1$7 from 'node:console';
 import require$$0$1 from 'os';
+import require$$1 from 'fs';
 import require$$1$9 from 'path';
 import require$$0$9 from 'assert';
 import require$$2$3 from 'child_process';
@@ -297,7 +297,7 @@ fileCommand.prepareKeyValueMessage = prepareKeyValueMessage;
 // We use any as a valid input type
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const crypto$1 = __importStar$4(require$$0$2);
-const fs$1 = __importStar$4(require$$1__default);
+const fs$1 = __importStar$4(require$$1);
 const os = __importStar$4(require$$0$1);
 const utils_1$1 = utils$6;
 function issueFileCommand(command, message) {
@@ -28559,7 +28559,7 @@ function requireSummary () {
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.summary = exports.markdownSummary = exports.SUMMARY_DOCS_URL = exports.SUMMARY_ENV_VAR = void 0;
 		const os_1 = require$$0$1;
-		const fs_1 = require$$1__default;
+		const fs_1 = require$$1;
 		const { access, appendFile, writeFile } = fs_1.promises;
 		exports.SUMMARY_ENV_VAR = 'GITHUB_STEP_SUMMARY';
 		exports.SUMMARY_DOCS_URL = 'https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary';
@@ -28980,7 +28980,7 @@ function requireIoUtil () {
 		exports.isRooted = isRooted;
 		exports.tryGetExecutablePath = tryGetExecutablePath;
 		exports.getCmdPath = getCmdPath;
-		const fs = __importStar(require$$1__default);
+		const fs = __importStar(require$$1);
 		const path = __importStar(require$$1$9);
 		_a = fs.promises
 		// export const {open} = 'fs'
@@ -30739,7 +30739,7 @@ var context$1 = {};
 
 Object.defineProperty(context$1, "__esModule", { value: true });
 context$1.Context = void 0;
-const fs_1 = require$$1__default;
+const fs_1 = require$$1;
 const os_1 = require$$0$1;
 class Context$1 {
     /**
@@ -72218,7 +72218,7 @@ var path = require$$1$9;
 var http$1 = require$$2$1;
 var https$1 = require$$1$2;
 var parseUrl$2 = require$$1$b.parse;
-var fs = require$$1__default;
+var fs = require$$1;
 var Stream = stream$4.Stream;
 var crypto = require$$0$2;
 var mime = mimeTypes;
@@ -80023,11 +80023,9 @@ function isRawConditionComplexFull(condition) {
 
 async function validateSubscription() {
     const eventPath = process.env.GITHUB_EVENT_PATH;
-    let repoPrivate;
-    if (eventPath && require$$1.existsSync(eventPath)) {
-        const eventData = JSON.parse(require$$1.readFileSync(eventPath, "utf8"));
-        repoPrivate = eventData?.repository?.private;
-    }
+    const repoPrivate = eventPath !== undefined && fs$2.existsSync(eventPath)
+        ? JSON.parse(fs$2.readFileSync(eventPath, "utf8"))?.repository?.private
+        : undefined;
     const upstream = "RebeccaStevens/issue-closed-labeler-action";
     const action = process.env.GITHUB_ACTION_REPOSITORY;
     const docsUrl = "https://docs.stepsecurity.io/actions/stepsecurity-maintained-actions";
@@ -80040,8 +80038,8 @@ async function validateSubscription() {
     coreExports.info("");
     if (repoPrivate === false)
         return;
-    const serverUrl = process.env.GITHUB_SERVER_URL || "https://github.com";
-    const body = { action: action || "" };
+    const serverUrl = process.env.GITHUB_SERVER_URL ?? "https://github.com";
+    const body = { action: action ?? "" };
     if (serverUrl !== "https://github.com")
         body.ghes_server = serverUrl;
     try {
