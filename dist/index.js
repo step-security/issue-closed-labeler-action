@@ -80025,24 +80025,24 @@ async function validateSubscription() {
     const eventPath = process.env.GITHUB_EVENT_PATH;
     let repoPrivate;
     if (eventPath && require$$1.existsSync(eventPath)) {
-        const eventData = JSON.parse(require$$1.readFileSync(eventPath, 'utf8'));
+        const eventData = JSON.parse(require$$1.readFileSync(eventPath, "utf8"));
         repoPrivate = eventData?.repository?.private;
     }
-    const upstream = 'RebeccaStevens/issue-closed-labeler-action';
+    const upstream = "RebeccaStevens/issue-closed-labeler-action";
     const action = process.env.GITHUB_ACTION_REPOSITORY;
-    const docsUrl = 'https://docs.stepsecurity.io/actions/stepsecurity-maintained-actions';
-    coreExports.info('');
-    coreExports.info('[1;36mStepSecurity Maintained Action[0m');
+    const docsUrl = "https://docs.stepsecurity.io/actions/stepsecurity-maintained-actions";
+    coreExports.info("");
+    coreExports.info("[1;36mStepSecurity Maintained Action[0m");
     coreExports.info(`Secure drop-in replacement for ${upstream}`);
     if (repoPrivate === false)
-        coreExports.info('[32m✓ Free for public repositories[0m');
+        coreExports.info("[32m✓ Free for public repositories[0m");
     coreExports.info(`[36mLearn more:[0m ${docsUrl}`);
-    coreExports.info('');
+    coreExports.info("");
     if (repoPrivate === false)
         return;
-    const serverUrl = process.env.GITHUB_SERVER_URL || 'https://github.com';
-    const body = { action: action || '' };
-    if (serverUrl !== 'https://github.com')
+    const serverUrl = process.env.GITHUB_SERVER_URL || "https://github.com";
+    const body = { action: action || "" };
+    if (serverUrl !== "https://github.com")
         body.ghes_server = serverUrl;
     try {
         await axios$1.post(`https://agent.api.stepsecurity.io/v1/github/${process.env.GITHUB_REPOSITORY}/actions/maintained-actions-subscription`, body, { timeout: 3000 });
@@ -80053,7 +80053,7 @@ async function validateSubscription() {
             coreExports.error(`[31mLearn how to enable a subscription: ${docsUrl}[0m`);
             process.exit(1);
         }
-        coreExports.info('Timeout or API not reachable. Continuing to next step.');
+        coreExports.info("Timeout or API not reachable. Continuing to next step.");
     }
 }
 const ghToken = coreExports.getInput("token");
