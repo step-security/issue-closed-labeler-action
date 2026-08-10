@@ -1946,11 +1946,11 @@ __metadata:
   linkType: hard
 
 "brace-expansion@npm:^2.0.1, brace-expansion@npm:^2.0.2":
-  version: 2.0.3
-  resolution: "brace-expansion@npm:2.0.3"
+  version: 2.1.4
+  resolution: "brace-expansion@npm:2.1.4"
   dependencies:
     balanced-match: ^1.0.0
-  checksum: e9dd66caaf0784126e1654f1bc19adb28f3ef86f39f2226f833f7700ec727c141f6cd85eaa47bacf3426beda01c9fbc3a2f28174cf59330dc9b58ffaf9e09d96
+  checksum: a2e0b87c1d348fe7a424f8e383e113ac9c4f111753dba60069aa22d55de6855695bf83f56d9a96c92fb14f42be17e272d5a2761eac7e25ca6687fa2b6efa44a8
   languageName: node
   linkType: hard
 
@@ -4391,9 +4391,9 @@ __metadata:
   linkType: hard
 
 "ip-address@npm:^10.0.1":
-  version: 10.1.1
-  resolution: "ip-address@npm:10.1.1"
-  checksum: 4a370ba2708290b3f6381110097960e99a6d0a67aee5487562dd3bb3d600b9c5b5614c6b38d5143ee5103c4652922f53d47e5154209c332ca437fba7b8e7619f
+  version: 10.2.1
+  resolution: "ip-address@npm:10.2.1"
+  checksum: 35cbf931da2271508b3004e4a5d1ff4a7dd2ca8f7c8cc1d52932d00a189744a0be3268bd9d2cdd174bc4721bf0948403a6630bb3443f7b84fefaba21495bbc4b
   languageName: node
   linkType: hard
 
@@ -4925,14 +4925,14 @@ __metadata:
   linkType: hard
 
 "js-yaml@npm:^3.14.1":
-  version: 3.15.0
-  resolution: "js-yaml@npm:3.15.0"
+  version: 3.15.1
+  resolution: "js-yaml@npm:3.15.1"
   dependencies:
     argparse: ^1.0.7
     esprima: ^4.0.0
   bin:
     js-yaml: bin/js-yaml.js
-  checksum: 0209830c3ce51cec4c2cefee4b2b68c547b56b36920004efbf7c6a91ae7eee784bf64341738ef1acffa975d16e7882e9b69234b9a4411f455b72b33d4d74771e
+  checksum: 536cfb984b61d1544dbdbe394254dd13481a94171cb3a61608572d9112a63cbace9dd900cb83a4e530ac36427fff77d9e1cb6734917c6fea951d00b4f7bbb163
   languageName: node
   linkType: hard
 
