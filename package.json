@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@actions/core": "2.0.1",
-    "@actions/github": "6.0.1",
+    "@actions/github": "9.0.0",
     "@octokit/graphql": "7.1.1",
     "@octokit/types": "^7.2.0",
     "ava": "5.3.1",
